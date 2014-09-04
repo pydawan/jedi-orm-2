@@ -1,0 +1,14 @@
+app.models
+jedi.db
+jedi.db.connection
+jedi.db.engine
+jedi.db.enums
+jedi.db.exceptions
+jedi.db.models
+jedi.db.util
+jedi.db.validators
+jedi.generator
+jedi.shortcuts
+jedi.tests.unittests
+jedi.types
+jedi.util.serialization
