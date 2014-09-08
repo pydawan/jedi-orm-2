@@ -3,7 +3,7 @@
  * 
  * Version: 1.0
  * 
- * Date: 2014/08/07
+ * Date: 2014/09/07
  * 
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
  * 
@@ -18,26 +18,33 @@
 package jedi.db.models;
 
 import java.io.FileInputStream;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+
 import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-import jedi.db.FetchType;
 import jedi.db.connection.ConnectionFactory;
 import jedi.db.engine.JediORMEngine;
+import jedi.db.enums.FetchType;
 import jedi.db.util.TableUtil;
+
 import jedi.types.DateTime;
 
 /**
@@ -1840,6 +1847,30 @@ public class Manager {
     
     public <T extends Model> QuerySet<T> getOrCreate() {
     	return null;
+    }
+    
+    public <T extends Model> QuerySet<T> where(String criteria, Object ... values) {
+    	QuerySet<T> qs = new QuerySet<T>();
+    	criteria = criteria == null ? "" : criteria;
+    	if (!criteria.isEmpty()) {
+    		StringBuilder sql = new StringBuilder();
+    		sql.append(String.format("SELECT * FROM %s WHERE ", tableName));
+    		if (values != null && values.length > 0) {
+    			MessageFormat message = new MessageFormat(criteria);
+    			for (int i = 0; i < values.length; i++) {
+    				if (values[i].getClass() == String.class || 
+    					values[i].getClass() == Date.class ||
+    					values[i].getClass() == DateTime.class) {
+    					values[i] = String.format("'%s'", values[i]);
+    				}
+    			}
+    			sql.append(message.format(values));
+    		} else {
+    			sql.append(criteria);
+    		}
+    		qs = this.raw(sql.toString(), this.entity);
+    	}
+    	return qs;
     }
     
     private Object convertZeroDateToNull(Object date) {
