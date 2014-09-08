@@ -3,7 +3,7 @@
  * 
  * Version: 1.0
  * 
- * Date: 2014/09/07
+ * Date: 2014/09/10
  * 
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
  * 
@@ -22,7 +22,6 @@ import org.junit.Test;
 import app.models.Country;
 
 public class ManagerTest {
-	
     @Test
     public void testWhere() {
     	QuerySet<Country> qs1 = Country.objects.where("name = {0} or id = 15", "Brazil");
