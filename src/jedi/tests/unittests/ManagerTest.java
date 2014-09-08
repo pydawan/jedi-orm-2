@@ -19,24 +19,12 @@ package jedi.tests.unittests;
 
 import jedi.db.models.QuerySet;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import app.models.Country;
 
 public class ManagerTest {
 	
-	@BeforeClass
-	public static void testSetup() {
-		
-	}
-
-    @AfterClass
-    public static void testCleanup() {
-
-    }
-
     @Test
     public void testWhere() {
     	QuerySet<Country> qs1 = Country.objects.where("name = {0} or id = 15", "Brazil");
