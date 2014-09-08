@@ -18,9 +18,7 @@
 package jedi.tests.unittests;
 
 import jedi.db.models.QuerySet;
-
 import org.junit.Test;
-
 import app.models.Country;
 
 public class ManagerTest {
