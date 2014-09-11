@@ -3,7 +3,7 @@
  *
  * Version: 1.0
  *
- * Date: 2014/09/02
+ * Date: 2014/09/04
  *
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
  *
@@ -41,10 +41,12 @@ import java.util.Properties;
 import jedi.app.JediApp;
 import jedi.app.JediAppLoader;
 
-import jedi.db.CascadeType;
-import jedi.db.FetchType;
-import jedi.db.Models;
 import jedi.db.connection.ConnectionFactory;
+
+import jedi.db.enums.CascadeType;
+import jedi.db.enums.FetchType;
+import jedi.db.enums.Models;
+
 import jedi.db.models.BooleanField;
 import jedi.db.models.CharField;
 import jedi.db.models.DateField;

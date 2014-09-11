@@ -3,7 +3,7 @@
  * 
  * Version: 1.0
  * 
- * Date: 2014/09/02
+ * Date: 2014/09/04
  * 
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
  * 
@@ -22,9 +22,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jedi.db.CascadeType;
-import jedi.db.FetchType;
-import jedi.db.Models;
+import jedi.db.enums.CascadeType;
+import jedi.db.enums.FetchType;
+import jedi.db.enums.Models;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

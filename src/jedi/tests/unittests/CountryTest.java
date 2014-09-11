@@ -60,7 +60,7 @@ public class CountryTest {
         countries.add(new Country("Bermuda", "BM"));
         countries.add(new Country("Brunei Darussalam", "BN"));
         countries.add(new Country("Bolivia, Plurinational State of", "BO"));
-        // countries.add(new Country("Brazil", "BR") );
+         countries.add(new Country("Brazil", "BR") );
         countries.add(new Country("Bahamas", "BS"));
         countries.add(new Country("Bhutan", "BT"));
         countries.add(new Country("Bouvet Island", "BV"));

@@ -3,7 +3,7 @@
  * 
  * Version: 1.0
  * 
- * Date: 2014/08/23
+ * Date: 2014/09/04
  * 
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
  * 
@@ -18,21 +18,25 @@
 package jedi.db.models;
 
 import java.io.Serializable;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import jedi.db.CascadeType;
 import jedi.db.connection.ConnectionFactory;
 import jedi.db.engine.JediORMEngine;
+import jedi.db.enums.CascadeType;
 import jedi.db.util.TableUtil;
 
 /**

@@ -1,16 +1,16 @@
 /***********************************************************************************************
  * @(#)ConnectionFactory.java
- * 
+ *
  * Version: 1.0
- * 
- * Date: 2014/07/30
- * 
+ *
+ * Date: 2014/09/10
+ *
  * Copyright (c) 2014 Thiago Alexandre Martins Monteiro.
- * 
+ *
  * All rights reserved. This program and the accompanying materials are made 
  * available under the terms of the GNU Public License v2.0 which accompanies 
  * this distribution, and is available at http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *    Thiago Alexandre Martins Monteiro - initial API and implementation
  ************************************************************************************************/
@@ -18,6 +18,7 @@
 package jedi.db.connection;
 
 import java.beans.PropertyVetoException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -28,10 +29,10 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * Database Connection Factory.
- * 
+ *
  * @author Thiago Alexandre Martins Monteiro
  * @version 1.0
- * 
+ *
  */
 public class ConnectionFactory {
 
@@ -39,108 +40,108 @@ public class ConnectionFactory {
     private static ComboPooledDataSource dataSource;
     
     static {
-    	if (JediORMEngine.JEDI_PROPERTIES_LOADED) {
-	        String engine = JediORMEngine.DATABASE_ENGINE;
-	        String host = JediORMEngine.DATABASE_HOST;
-	        String port = JediORMEngine.DATABASE_PORT;
-	        String user = JediORMEngine.DATABASE_USER;
-	        String password = JediORMEngine.DATABASE_PASSWORD;
-	        String database = JediORMEngine.DATABASE_NAME;
-	        String driver = "";
-	        String url = "";            
-	        
-	        // Egine
-	        if (!engine.isEmpty()) {
-	        	// Creates the connection pool
-	            dataSource = new ComboPooledDataSource();
-	            dataSource.setInitialPoolSize(JediORMEngine.DATABASE_INITIAL_POOL_SIZE);
-	            dataSource.setAcquireIncrement(JediORMEngine.DATABASE_ACQUIRE_INCREMENT);
-	            dataSource.setMaxPoolSize(JediORMEngine.DATABASE_MAX_POOL_SIZE);
-	            dataSource.setMinPoolSize(JediORMEngine.DATABASE_MIN_POOL_SIZE);
-	            dataSource.setMaxStatements(JediORMEngine.DATABASE_MAX_STATEMENTS);
-	        	// Host
-	            if (host.isEmpty()) {
-	                if (!engine.equals("h2") && !engine.equals("sqlite")) {
-	                    host = "localhost";
-	                }
-	            }                    
-	            // Port
-	            if (port.isEmpty()) {
-	                if (engine.equals("mysql")) {
-	                    port = "3306";
-	                } else if (engine.equals("postgresql")) {
-	                    port = "5432";
-	                } else if (engine.equals("oracle")) {
-	                    port = "1521";
-	                }
-	            }
-	            // User
-	            if (user.isEmpty()) {
-	                if (engine.equals("mysql")) {
-	                    user = "root";
-	                } else if (engine.equals("postgresql")) {
-	                    user = "postgres";
-	                } else if (engine.equals("oracle")) {
-	                    user = "hr";
-	                } else if (engine.equals("h2")) {
-	                    user = "sa";
-	                }
-	                dataSource.setUser(user);
-	            }                    
-	            // Password
-	            dataSource.setPassword(password);
-	            // Database
-	            if (database.isEmpty()) {
-	                if (engine.equals("mysql")) {
-	                    database = "mysql";
-	                } else if (engine.equals("postgresql")) {
-	                    database = "postgres";
-	                } else if (engine.equals("oracle")) {
-	                    database = "xe";
-	                } else if (engine.equals("h2")) {
-	                    database = "test";
-	                }
-	            }                
-	            // JDBC Drive and URL
-	            if (engine.equals("mysql")) {
-	            	driver = "com.mysql.jdbc.Driver";
-	            	url = String.format(
-	                    "jdbc:%s://%s:%s/%s?user=%s&password=%s",
-	                    engine, host, port, database, user, password
-	                );
-	            } else if (engine.equals("postgresql")) {
-	            	driver = "org.postgresql.Driver";
-	            } else if (engine.equals("oracle")) {
-	            	driver = "oracle.jdbc.driver.OracleDriver";	
-	            } else if (engine.equals("h2")) {
-	            	driver = "org.h2.Driver";
-	            }
-	            dataSource.setJdbcUrl(url);
-	            try {
-					dataSource.setDriverClass(driver);
-				} catch (PropertyVetoException e) {
-					e.printStackTrace();
-				}
-	        }
-    	}
+        if (JediORMEngine.JEDI_PROPERTIES_LOADED) {
+            String engine = JediORMEngine.DATABASE_ENGINE;
+            String host = JediORMEngine.DATABASE_HOST;
+            String port = JediORMEngine.DATABASE_PORT;
+            String user = JediORMEngine.DATABASE_USER;
+            String password = JediORMEngine.DATABASE_PASSWORD;
+            String database = JediORMEngine.DATABASE_NAME;
+            String driver = "";
+            String url = "";
+
+            // Egine
+            if (!engine.isEmpty()) {
+                // Creates the connection pool
+                dataSource = new ComboPooledDataSource();
+                dataSource.setInitialPoolSize(JediORMEngine.DATABASE_INITIAL_POOL_SIZE);
+                dataSource.setAcquireIncrement(JediORMEngine.DATABASE_ACQUIRE_INCREMENT);
+                dataSource.setMaxPoolSize(JediORMEngine.DATABASE_MAX_POOL_SIZE);
+                dataSource.setMinPoolSize(JediORMEngine.DATABASE_MIN_POOL_SIZE);
+                dataSource.setMaxStatements(JediORMEngine.DATABASE_MAX_STATEMENTS);
+                // Host
+                if (host.isEmpty()) {
+                    if (!engine.equals("h2") && !engine.equals("sqlite")) {
+                        host = "localhost";
+                    }
+                }
+                // Port
+                if (port.isEmpty()) {
+                    if (engine.equals("mysql")) {
+                        port = "3306";
+                    } else if (engine.equals("postgresql")) {
+                        port = "5432";
+                    } else if (engine.equals("oracle")) {
+                        port = "1521";
+                    }
+                }
+                // User
+                if (user.isEmpty()) {
+                    if (engine.equals("mysql")) {
+                        user = "root";
+                    } else if (engine.equals("postgresql")) {
+                        user = "postgres";
+                    } else if (engine.equals("oracle")) {
+                        user = "hr";
+                    } else if (engine.equals("h2")) {
+                        user = "sa";
+                    }
+                    dataSource.setUser(user);
+                }
+                // Password
+                dataSource.setPassword(password);
+                // Database
+                if (database.isEmpty()) {
+                    if (engine.equals("mysql")) {
+                        database = "mysql";
+                    } else if (engine.equals("postgresql")) {
+                        database = "postgres";
+                    } else if (engine.equals("oracle")) {
+                        database = "xe";
+                    } else if (engine.equals("h2")) {
+                        database = "test";
+                    }
+                }
+                // JDBC Drive and URL
+               if (engine.equals("mysql")) {
+                   driver = "com.mysql.jdbc.Driver";
+                   url = String.format(
+                       "jdbc:%s://%s:%s/%s?user=%s&password=%s",
+                       engine, host, port, database, user, password
+                   );
+                } else if (engine.equals("postgresql")) {
+                    driver = "org.postgresql.Driver";
+                } else if (engine.equals("oracle")) {
+                   driver = "oracle.jdbc.driver.OracleDriver";	
+                } else if (engine.equals("h2")) {
+                   driver = "org.h2.Driver";
+                }
+                dataSource.setJdbcUrl(url);
+                try {
+                    dataSource.setDriverClass(driver);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
-    
+
     public static Connection getConnection() {
-    	try {
-    		if (dataSource != null) {
-    			connection = dataSource.getConnection();
-    		}			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    	return connection;
+        try {
+            if (dataSource != null) {
+                connection = dataSource.getConnection();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
     }
-    
+
     /**
      * @return Connection Returns a connection to a database.
      */
     public Connection connect() {
-    	return getConnection();
+        return getConnection();
     }
 
     /**
@@ -150,7 +151,7 @@ public class ConnectionFactory {
     public static Connection connect(String... args) {
         return getConnection(args);
     }
-        
+
     /**
      * @param args
      * @return
@@ -192,7 +193,8 @@ public class ConnectionFactory {
                             databaseHost = args[i].split("=")[1];
                         }
                     }
-                    if (databaseHost != null && databaseHost.isEmpty() && !databaseEngine.equals("h2") 
+                    if (databaseHost != null && databaseHost.isEmpty() 
+                        && !databaseEngine.equals("h2") 
                         && !databaseEngine.equals("sqlite")) {
                         databaseHost = "localhost";
                     }
@@ -271,7 +273,11 @@ public class ConnectionFactory {
                     connection = DriverManager.getConnection(
                         String.format(
                             "jdbc:mysql://%s:%s/%s?user=%s&password=%s", 
-                            databaseHost, databasePort, databaseName, databaseUser, databasePassword
+                            databaseHost, 
+                            databasePort, 
+                            databaseName, 
+                            databaseUser, 
+                            databasePassword
                         )
                     );
                 } else if (databaseEngine.equals("postgresql")) {
@@ -301,7 +307,8 @@ public class ConnectionFactory {
                     );
                 }
                 if (connection != null) {
-                    if (!databaseOptionsAutocommit.isEmpty() && (databaseOptionsAutocommit.equalsIgnoreCase("true") 
+                    if (!databaseOptionsAutocommit.isEmpty() 
+                        && (databaseOptionsAutocommit.equalsIgnoreCase("true") 
                         || databaseOptionsAutocommit.equalsIgnoreCase("false"))) {
                         connection.setAutoCommit(Boolean.parseBoolean(databaseOptionsAutocommit));
                     } else {
@@ -309,7 +316,8 @@ public class ConnectionFactory {
                     }
                 }
             } catch (SQLException e) {
-                System.out.println("Ocorreram uma ou mais falhas ao tentar obter uma conexão com o banco de dados.");
+            	String msg = "Ocorreram uma ou mais falhas ao tentar obter uma conexão com o banco de dados.";
+                System.out.println(msg);
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 System.out.println("O driver de conexão com o banco de dados não foi encontrado.");

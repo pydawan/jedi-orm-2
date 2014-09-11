@@ -1872,7 +1872,7 @@ public class Manager {
     	}
     	return qs;
     }
-    
+
     private Object convertZeroDateToNull(Object date) {
     	if (date instanceof java.sql.Time) {
     		date = date.toString().equals("00:00:00") ? null : date;
