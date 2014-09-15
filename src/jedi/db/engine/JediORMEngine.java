@@ -170,7 +170,7 @@ public abstract class JediORMEngine {
     public static List<String> GENERATED_TABLES = new ArrayList();
 
     /**
-     * Converte um PATH do sistema de arquivos em
+     * Converte um PATH do sistema de arquivos em um
      * CLASSPATH do Java.
      *
      * @param path PATH do sistema de arquivos
